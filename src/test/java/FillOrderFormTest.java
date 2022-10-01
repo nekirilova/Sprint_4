@@ -29,7 +29,7 @@ public class FillOrderFormTest {
     @Test
     public void fillOrderFormShowsOrderProof() {
         OrderPageOne orderPageOne = new OrderPageOne(driver);
-        //Ищем поле ввода Имя и передаем в него имя
+        //Последовательно заполняем все поля формы на странице 1
         driver.findElement(orderPageOne.getNameInput()).sendKeys("Алена");
         driver.findElement(orderPageOne.getLastNameInput()).sendKeys("Метенева");
         driver.findElement(orderPageOne.getAddressInput()).sendKeys("ул. Уральская, 74-53");
@@ -40,9 +40,9 @@ public class FillOrderFormTest {
       //  Assert.assertFalse("Сообщения об ошибке быть не должно", driver.findElement(By.xpath(".//div[text()='Введите корректную фамилию']")).isDisplayed());
     }
 
-//    @After
-//    public void tearDown(){
-//        driver.quit();
-//    }
+    @After
+    public void tearDown(){
+        driver.quit();
+    }
 
 }
