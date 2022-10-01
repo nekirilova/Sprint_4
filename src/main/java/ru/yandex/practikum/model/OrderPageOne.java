@@ -2,6 +2,7 @@ package ru.yandex.practikum.model;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class OrderPageOne {
     //локаторы
@@ -25,28 +26,44 @@ public class OrderPageOne {
         this.driver = driver;
     }
 
+    public void fillNameInput(String name) {
+       driver.findElement(NAME_INPUT).sendKeys(name);
+    }
+    public void fillLastNameInput(String lastname) {
+        driver.findElement(LAST_NAME_INPUT).sendKeys(lastname);
+    }
+    public void fillAddressInput(String address) {
+        driver.findElement(ADDRESS_INPUT).sendKeys(address);
+    }
+    public void fillSubwayList(By subwayStation) {
+        driver.findElement(SUBWAY_LIST).click();
+        driver.findElement(subwayStation).click();
+    }
+    public void fillPhoneInput(String phone) {
+        driver.findElement(PHONE_INPUT).sendKeys(phone);
+    }
     //Геттер для формы заказа на странице 1
-    public By getOrderForm1(){
-        return ORDER_FORM_1;
+ public By getOrderForm1(){
+       return ORDER_FORM_1;
     }
-    //Геттер для поля ввода Имя
-    public By getNameInput(){
-        return NAME_INPUT;
-    }
-    //Геттер для поля ввода Фамилия
-    public By getLastNameInput(){
-        return LAST_NAME_INPUT;
-    }
-    //Геттер для поля ввода Адрес
-    public By getAddressInput(){
-        return ADDRESS_INPUT;
-    }
-    //Геттер для поля списка Станции метро
-    public By getSubwayList(){
-        return SUBWAY_LIST;
-    }
-    //Геттер для поля ввода Телефон
-    public By getPhoneInput(){
-        return PHONE_INPUT;
-    }
+//    //Геттер для поля ввода Имя
+//    public By getNameInput(){
+//        return NAME_INPUT;
+//    }
+//    //Геттер для поля ввода Фамилия
+//    public By getLastNameInput(){
+//        return LAST_NAME_INPUT;
+//    }
+//    //Геттер для поля ввода Адрес
+//    public By getAddressInput(){
+//        return ADDRESS_INPUT;
+//    }
+//    //Геттер для поля списка Станции метро
+//    public By getSubwayList(){
+//        return SUBWAY_LIST;
+//    }
+//    //Геттер для поля ввода Телефон
+//    public By getPhoneInput(){
+//        return PHONE_INPUT;
+//    }
 }

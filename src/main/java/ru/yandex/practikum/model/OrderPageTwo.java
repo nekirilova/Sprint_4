@@ -27,30 +27,47 @@ public class OrderPageTwo {
         this.driver = driver;
     }
 
+    public void fillDateInput(By date) {
+        driver.findElement(DATE_INPUT).click();
+        driver.findElement(date).click();
+    }
+
+    public void fillRentDays(By rent) {
+        driver.findElement(RENT_DAYS).click();
+        driver.findElement(rent).click();
+    }
+
+    public void fillScooterColor() {
+        driver.findElement(SCOOTER_COLOR).click();
+
+    }
+    public void fillComment(String comment) {
+        driver.findElement(COMMENT).sendKeys(comment);
+    }
     //Геттер для поля выбора дата
-    public By getDateInput(){
-
-        return DATE_INPUT;
-    }
-
-    //Геттер для поля выбора срока аренды
-    public By getRentDays(){
-
-        return RENT_DAYS;
-    }
-
-    //Геттер для поля выбора цвета
-    public By getScooterColor(){
-
-        return SCOOTER_COLOR;
-    }
-
-    //Геттер для поля ввода комментария
-    public By getComment(){
-
-        return COMMENT;
-    }
-
+//    public By getDateInput(){
+//
+//        return DATE_INPUT;
+//    }
+//
+//    //Геттер для поля выбора срока аренды
+//    public By getRentDays(){
+//
+//        return RENT_DAYS;
+//    }
+//
+//    //Геттер для поля выбора цвета
+//    public By getScooterColor(){
+//
+//        return SCOOTER_COLOR;
+//    }
+//
+//    //Геттер для поля ввода комментария
+//    public By getComment(){
+//
+//        return COMMENT;
+//    }
+//
     //геттер для кнопки заказа
 
     public By getOrderButton() {
