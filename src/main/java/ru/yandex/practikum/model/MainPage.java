@@ -24,7 +24,7 @@ public class MainPage {
     //Кнопка с седьмым вопросом в FAQ
     private final static By SEVENTH_BUTTON = By.xpath(".//div[@id='accordion__heading-6']");
     //Кнопка с восьмым вопросом в FAQ
-    private final static By EIGHTH_BUTTON = By.xpath(".//div[@id='accordion__heading-6']");
+    private final static By EIGHTH_BUTTON = By.xpath(".//div[@id='accordion__heading-7']");
     private final static By buttons[] = {FIRST_BUTTON, SECOND_BUTTON, THIRD_BUTTON, FOURTH_BUTTON,
     FIFTH_BUTTON, SIXTH_BUTTON, SEVENTH_BUTTON, EIGHTH_BUTTON};
 

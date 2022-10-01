@@ -2,6 +2,7 @@ package ru.yandex.practikum.model;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class OrderPageTwo {
     //локаторы
@@ -26,60 +27,41 @@ public class OrderPageTwo {
 
         this.driver = driver;
     }
-
+    //метод, который выбирает дату
     public void fillDateInput(By date) {
         driver.findElement(DATE_INPUT).click();
         driver.findElement(date).click();
     }
-
+//метод, которыф выбирает срок аренды
     public void fillRentDays(By rent) {
         driver.findElement(RENT_DAYS).click();
         driver.findElement(rent).click();
     }
-
+//метод, который выбирает цвет самоката
     public void fillScooterColor() {
         driver.findElement(SCOOTER_COLOR).click();
 
     }
+    //метод, который пишет комментарий
     public void fillComment(String comment) {
         driver.findElement(COMMENT).sendKeys(comment);
     }
     //Геттер для поля выбора дата
-//    public By getDateInput(){
-//
-//        return DATE_INPUT;
-//    }
-//
-//    //Геттер для поля выбора срока аренды
-//    public By getRentDays(){
-//
-//        return RENT_DAYS;
-//    }
-//
-//    //Геттер для поля выбора цвета
-//    public By getScooterColor(){
-//
-//        return SCOOTER_COLOR;
-//    }
-//
-//    //Геттер для поля ввода комментария
-//    public By getComment(){
-//
-//        return COMMENT;
-//    }
-//
-    //геттер для кнопки заказа
-
-    public By getOrderButton() {
-        return ORDER_BUTTON;
-    }
-    //геттер для кнопки подтверждения
-    public By getConfirmOrder() {
-        return CONFIRM_ORDER;
+    public By getDateInput(){
+        return DATE_INPUT;
     }
 
-    //геттер для модального окна об успешном создании заказа
-    public By getOrderModal() {
-        return ORDER_MODAL;
+    //метод для нажатия кнопки Заказать
+    public void clickOrderButton() {
+        driver.findElement(ORDER_BUTTON).click();
+    }
+    //метод для нажатия кнопки Подтверждения
+    public void clickConfirmOrder() {
+        driver.findElement(CONFIRM_ORDER).click();
+    }
+
+    //метод, который ищет модальное окно об успешном создании заказа
+    public WebElement findOrderModal() {
+       return driver.findElement(ORDER_MODAL);
     }
 }

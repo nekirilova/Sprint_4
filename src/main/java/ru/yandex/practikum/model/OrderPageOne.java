@@ -18,7 +18,8 @@ public class OrderPageOne {
     private static final By SUBWAY_LIST = By.xpath(".//input[@placeholder='* Станция метро']");
     //Поле ввода Телефон
     private static final By PHONE_INPUT = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
-
+    //Кнопка Далее
+    private static final  By NEXT_BUTTON = By.xpath(".//div/button[text()='Далее']");
 
     //конструктор класса:
     private WebDriver driver;
@@ -26,44 +27,34 @@ public class OrderPageOne {
         this.driver = driver;
     }
 
+    //Метод для заполнения поля Имя
     public void fillNameInput(String name) {
        driver.findElement(NAME_INPUT).sendKeys(name);
     }
+    //Метод для заполнения поля Фамилия
     public void fillLastNameInput(String lastname) {
         driver.findElement(LAST_NAME_INPUT).sendKeys(lastname);
     }
+    //Метод для заполнения поля Адрес
     public void fillAddressInput(String address) {
         driver.findElement(ADDRESS_INPUT).sendKeys(address);
     }
+    //Метод для выбора станции метро
     public void fillSubwayList(By subwayStation) {
-        driver.findElement(SUBWAY_LIST).click();
-        driver.findElement(subwayStation).click();
+        driver.findElement(SUBWAY_LIST).click(); //кликаем на выпадающий список
+        driver.findElement(subwayStation).click(); //выбираем нужную станцию
     }
+    //Метод для заполнения поля Телефон
     public void fillPhoneInput(String phone) {
         driver.findElement(PHONE_INPUT).sendKeys(phone);
+    }
+
+    public void clickNextButton() {
+        driver.findElement(NEXT_BUTTON).click();
     }
     //Геттер для формы заказа на странице 1
  public By getOrderForm1(){
        return ORDER_FORM_1;
     }
-//    //Геттер для поля ввода Имя
-//    public By getNameInput(){
-//        return NAME_INPUT;
-//    }
-//    //Геттер для поля ввода Фамилия
-//    public By getLastNameInput(){
-//        return LAST_NAME_INPUT;
-//    }
-//    //Геттер для поля ввода Адрес
-//    public By getAddressInput(){
-//        return ADDRESS_INPUT;
-//    }
-//    //Геттер для поля списка Станции метро
-//    public By getSubwayList(){
-//        return SUBWAY_LIST;
-//    }
-//    //Геттер для поля ввода Телефон
-//    public By getPhoneInput(){
-//        return PHONE_INPUT;
-//    }
+
 }

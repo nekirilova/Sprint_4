@@ -14,6 +14,7 @@ import ru.yandex.practikum.model.OrderPageOne;
 
 import java.time.Duration;
 
+//Создаем класс для тестов, которые проверяют работу кнопки "Заказать" вверху и внизу страницы
 public class CheckOrderButtons {
     private WebDriver driver;
 
@@ -69,6 +70,6 @@ public class CheckOrderButtons {
 
     @After
     public void tearDown() {
-    driver.quit();
+        driver.quit();
     }
 }
