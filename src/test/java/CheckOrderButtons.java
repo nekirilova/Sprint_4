@@ -18,13 +18,16 @@ import java.time.Duration;
 public class CheckOrderButtons {
     private WebDriver driver;
 
+
+
     @Before
     public void openSamokatApp() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
+        MainPage mainPage = new MainPage(driver);
         //открываем страницу приложения Самокат
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.get(mainPage.getMainPageURL());
 
     }
 
@@ -32,14 +35,12 @@ public class CheckOrderButtons {
     @Test
     public void clickOrderButtonOnTopOpensOrderForm() {
         MainPage mainPage = new MainPage(driver);
-
-       //Ищем кнопку заказа вверху страницы и кликаем на нее
-        driver.findElement(mainPage.getOrderButtonOnTop()).click();
-
         OrderPageOne orderPageOne = new OrderPageOne(driver);
+       //Ищем кнопку заказа вверху страницы и кликаем на нее
+        mainPage.clickOrderButtonOnTop();
 
         //Ищем форму заказа на странице и задаем ожидание, пока она не станет видимой
-        WebElement orderFormOne = driver.findElement(orderPageOne.getOrderForm1());
+        WebElement orderFormOne = orderPageOne.getOrderFormOne();
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(orderFormOne));
 
         //Проверяем, что форма есть
@@ -50,18 +51,12 @@ public class CheckOrderButtons {
     @Test
     public void clickOrderButtonOnBottomOpensOrderForm() {
         MainPage mainPage = new MainPage(driver);
-
-        //Ищем кнопку заказа внизу страницы и скроллим до нее
-        WebElement orderButtonOnBottom = driver.findElement(mainPage.getOrderButtonOnBottom());
-        //Ждем, пока кнопка станет кликабельной и кликаем на нее
-        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", orderButtonOnBottom);
-        new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.elementToBeClickable(orderButtonOnBottom));
-        orderButtonOnBottom.click();
-
         OrderPageOne orderPageOne = new OrderPageOne(driver);
+        //Ищем кнопку заказа внизу страницы, скроллим до нее и кликаем
+        mainPage.scrollAndClickOrderButtonOnBottom();
 
         //Ищем форму заказа на странице и задаем ожидание, пока она не станет видимой
-        WebElement orderFormOne = driver.findElement(orderPageOne.getOrderForm1());
+        WebElement orderFormOne = orderPageOne.getOrderFormOne();
         new WebDriverWait(driver, Duration.ofSeconds(5)).until(ExpectedConditions.visibilityOf(orderFormOne));
 
         //Проверяем, что форма есть

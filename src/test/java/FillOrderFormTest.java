@@ -17,20 +17,21 @@ import java.time.Duration;
 
 @RunWith(Parameterized.class)
 public class FillOrderFormTest {
+    private WebDriver driver;
     //определяем поля для конструктора тестовых данных
     private final String name;
     private final String lastname;
     private final String address;
-    private final By subwayStation;
+    private final int subwayStation;
     private final String phone;
-    private final By date;
-    private final By rent;
-   // private final By color;
+    private final int date;
+    private final int rent;
+
     private final String comment;
 
     //создаем конструктор тестовых данных
     public FillOrderFormTest(String name, String lastname, String address,
-                             By subwayStation, String phone, By date, By rent, String comment) {
+                             int subwayStation, String phone, int date, int rent, String comment) {
         this.name = name;
         this.lastname = lastname;
         this.address = address;
@@ -40,22 +41,16 @@ public class FillOrderFormTest {
         this.rent = rent;
         this.comment = comment;
     }
+
     //создаем многомерный объект с данными для тестов
     @Parameterized.Parameters
     public static Object[][] fillOrderForm() {
         return new Object[][] {
-                {"Алена", "Метенева", "Ленина, 25-18", By.xpath(".//div/ul/li/button/div[text()='Черкизовская']"),
-                "89120005544", By.xpath("//div[@class='react-datepicker__day react-datepicker__day--004']"),
-                        By.xpath(".//div[@class='Dropdown-menu']/div[text()='трое суток']"), "Привезите скорее!"},
-                {"Ян", "Оооооооооооооо", "г.Москва, пр-т Ленина, 64-2, кв.3", By.xpath(".//div/ul/li/button/div[text()='Сокольники']"),
-                        "+79120005544", By.xpath(".//div[@aria-label='Choose пятница, 30-е сентября 2022 г.']"),
-                        By.xpath(".//div[@class='Dropdown-menu']/div[text()='семеро суток']"), "Без комментариев"}
+                {"Алена", "Метенева", "Ленина, 25-18", 0, "89120005544", 0, 1, "Привезите скорее!"},
+                {"Ян", "Оооооооооооооо", "г.Москва, пр-т Ленина, 64-2, кв.3", 1, "+79120005544", 1,
+                        1, "Без комментариев"}
         };
     }
-
-
-    private WebDriver driver;
-
 
     @Before
     public void openSamokatApp() {
@@ -63,17 +58,16 @@ public class FillOrderFormTest {
       //options.addArguments("--no-sandbox", "--headless", "--disable-dev-shm-usage");
         driver = new ChromeDriver();
         //открываем первую страницу формы заказа приложения Самокат
-        driver.get("https://qa-scooter.praktikum-services.ru/order");
+        OrderPageOne orderPageOne = new OrderPageOne(driver);
+        orderPageOne.getOrderPageURL();
 
     }
 
     @Test
     public void fillOrderFormShowsOrderProof() {
-        //Создаем объекты класса
-        OrderPageOne orderPageOne = new OrderPageOne(driver);
-        OrderPageTwo orderPageTwo = new OrderPageTwo(driver);
-        //Последовательно заполняем все поля формы на странице 1
 
+        //Последовательно заполняем все поля формы на странице 1
+        OrderPageOne orderPageOne = new OrderPageOne(driver);
         orderPageOne.fillNameInput(name); //вводим имя
         orderPageOne.fillLastNameInput(lastname); //вводим фамилию
         orderPageOne.fillAddressInput(address); //вводим адрес
@@ -82,6 +76,7 @@ public class FillOrderFormTest {
         orderPageOne.clickNextButton(); //кликаем кнопку Далее
 
         //Ждем, когда загрузится вторая страница (когда поле для выбора даты станет активным)
+        OrderPageTwo orderPageTwo = new OrderPageTwo(driver);
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.elementToBeClickable(orderPageTwo.getDateInput()));
         orderPageTwo.fillDateInput(date); //выбираем дату
         orderPageTwo.fillRentDays(rent); //выбираем срок аренды

@@ -5,28 +5,38 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class OrderPageOne {
+    //URL первой страницы с формой для заказа
+    private final String ORDER_PAGE_URL = "https://qa-scooter.praktikum-services.ru/order";
+
     //локаторы
     //форма для заполнения данных заказа - 1 страница
-    private static final By ORDER_FORM_1 = By.cssSelector(".Order_Content__bmtHS");
+    private final By ORDER_FORM_1 = By.cssSelector(".Order_Content__bmtHS");
     //поле ввода Имя
-    private static final By NAME_INPUT = By.xpath(".//input[@placeholder='* Имя']");
+    private final By NAME_INPUT = By.xpath(".//input[@placeholder='* Имя']");
     //Поле ввода Фамилия
-    private static final By LAST_NAME_INPUT = By.xpath(".//input[@placeholder='* Фамилия']");
+    private final By LAST_NAME_INPUT = By.xpath(".//input[@placeholder='* Фамилия']");
     //Поле ввода Адрес
-    private static final By ADDRESS_INPUT = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
+    private final By ADDRESS_INPUT = By.xpath(".//input[@placeholder='* Адрес: куда привезти заказ']");
     //Выпадающий список Станция метро
-    private static final By SUBWAY_LIST = By.xpath(".//input[@placeholder='* Станция метро']");
+    private final By SUBWAY_LIST = By.xpath(".//input[@placeholder='* Станция метро']");
+    //ЛОкаторы для станций, которые будут использоваться в тестах:
+    private By[] subway = {By.xpath(".//div/ul/li/button/div[text()='Черкизовская']"),
+    By.xpath(".//div/ul/li/button/div[text()='Сокольники']")};
     //Поле ввода Телефон
-    private static final By PHONE_INPUT = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
+    private final By PHONE_INPUT = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
     //Кнопка Далее
-    private static final  By NEXT_BUTTON = By.xpath(".//div/button[text()='Далее']");
+    private final  By NEXT_BUTTON = By.xpath(".//div/button[text()='Далее']");
 
     //конструктор класса:
     private WebDriver driver;
     public OrderPageOne(WebDriver driver) {
+
         this.driver = driver;
     }
-
+    //метод, который открывает страницу с формой заказа
+    public void getOrderPageURL() {
+        driver.get(ORDER_PAGE_URL);
+    }
     //Метод для заполнения поля Имя
     public void fillNameInput(String name) {
        driver.findElement(NAME_INPUT).sendKeys(name);
@@ -39,10 +49,11 @@ public class OrderPageOne {
     public void fillAddressInput(String address) {
         driver.findElement(ADDRESS_INPUT).sendKeys(address);
     }
+
     //Метод для выбора станции метро
-    public void fillSubwayList(By subwayStation) {
+    public void fillSubwayList(int index) {
         driver.findElement(SUBWAY_LIST).click(); //кликаем на выпадающий список
-        driver.findElement(subwayStation).click(); //выбираем нужную станцию
+        driver.findElement(subway[index]).click(); //выбираем нужную станцию
     }
     //Метод для заполнения поля Телефон
     public void fillPhoneInput(String phone) {
@@ -52,9 +63,9 @@ public class OrderPageOne {
     public void clickNextButton() {
         driver.findElement(NEXT_BUTTON).click();
     }
-    //Геттер для формы заказа на странице 1
- public By getOrderForm1(){
-       return ORDER_FORM_1;
+    //WebElement orderFormOne = driver.findElement(orderPageOne.getOrderForm1());
+    public WebElement getOrderFormOne() {
+        return driver.findElement(ORDER_FORM_1);
     }
 
 }

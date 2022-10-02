@@ -9,33 +9,40 @@ public class OrderPageTwo {
     //форма для заполнения данных заказа - 2 страница
 
     //поле для выбора даты
-    private static final By DATE_INPUT = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
+    private final By DATE_INPUT = By.xpath(".//input[@placeholder='* Когда привезти самокат']");
+    //массив значений локаторов для выбора даты
+    private By[] datepicker = { By.xpath("//div[@class='react-datepicker__day react-datepicker__day--004']"),
+            By.xpath(".//div[@aria-label='Choose пятница, 30-е сентября 2022 г.']") };
     //поле для выбора срока аренды
-    private static final By RENT_DAYS = By.xpath(".//div[@class='Dropdown-placeholder']");
+    private final By RENT_DAYS = By.xpath(".//div[@class='Dropdown-placeholder']");
+
+    //массив значений локаторов для выбора срока аренды
+    private By[] rentDays = {By.xpath(".//div[@class='Dropdown-menu']/div[text()='трое суток']"),
+            By.xpath(".//div[@class='Dropdown-menu']/div[text()='семеро суток']") };
     //поле для выбора цвета самоката
-    private static final By SCOOTER_COLOR = By.xpath(".//*[@id='black']");
+    private final By SCOOTER_COLOR = By.xpath(".//*[@id='black']");
     //поле для ввода комментария
-    private static final By COMMENT = By.xpath(".//input[@placeholder='Комментарий для курьера']");
+    private final By COMMENT = By.xpath(".//input[@placeholder='Комментарий для курьера']");
     //кнопка заказа самоката
-    private static final By ORDER_BUTTON = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
+    private final By ORDER_BUTTON = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM']");
     //кнопка подтверждения заказа
-    private static final By CONFIRM_ORDER = By.xpath(".//div/button[text()='Да']");
+    private final By CONFIRM_ORDER = By.xpath(".//div/button[text()='Да']");
     //модальное окно с данными заказа
-    private static final By ORDER_MODAL = By.xpath(".//div[text()='Заказ оформлен']");
+    private final By ORDER_MODAL = By.xpath(".//div[text()='Заказ оформлен']");
     private WebDriver driver;
     public OrderPageTwo(WebDriver driver) {
 
         this.driver = driver;
     }
     //метод, который выбирает дату
-    public void fillDateInput(By date) {
+    public void fillDateInput(int index) {
         driver.findElement(DATE_INPUT).click();
-        driver.findElement(date).click();
+        driver.findElement(datepicker[index]).click();
     }
 //метод, которыф выбирает срок аренды
-    public void fillRentDays(By rent) {
+    public void fillRentDays(int index) {
         driver.findElement(RENT_DAYS).click();
-        driver.findElement(rent).click();
+        driver.findElement(rentDays[index]).click();
     }
 //метод, который выбирает цвет самоката
     public void fillScooterColor() {
